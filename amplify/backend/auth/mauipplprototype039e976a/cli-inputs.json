@@ -2,7 +2,7 @@
   "version": "1",
   "cognitoConfig": {
     "identityPoolName": "mauipplprototype039e976a_identitypool_039e976a",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "mauipp039e976a",
     "userPoolName": "mauipplprototype039e976a_userpool_039e976a",
     "autoVerifiedAttributes": [
