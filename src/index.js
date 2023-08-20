@@ -3,14 +3,39 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@aws-amplify/ui-react/styles.css';
+import { Route, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Signin from './Signin';
+import Listings from './Listings'
+
 import { Amplify } from 'aws-amplify';
 import awsExports from './aws-exports';
 Amplify.configure(awsExports);
 
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      {
+        path: '/listings',
+        element: <Listings />,
+      },
+      {
+        path: '/signin',
+        element: <Signin />,
+      },
+
+
+    ]
+  },
+]);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 

@@ -1,11 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
-import '@aws-amplify/ui-react/styles.css';
-import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
 import { useEffect, useState } from 'react';
 import { STSClient, GetCallerIdentityCommand } from '@aws-sdk/client-sts';
-
+import { Row, Container, Button, Nav } from 'react-bootstrap';
+import { Outlet } from 'react-router-dom';
 
 function App({ user }) {
 
@@ -29,26 +28,34 @@ function App({ user }) {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <div>{JSON.stringify(myuser)}</div>
-      <div>{JSON.stringify(userdata)}</div>
+      <Container fluid>
+        <Nav variant='tab'>
+          <Nav.Item>
+            <Nav.Link href='/'>Home</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link href='/listings'>Listings</Nav.Link>
+          </Nav.Item>
+
+          <Nav.Item>
+            <Nav.Link href='/signin'>Sign In</Nav.Link>
+          </Nav.Item>
+        </Nav>
+        <Container>
+          <Row>          
+            <Outlet />        
+          </Row>
+          <Row>
+            <div>
+              <div>{JSON.stringify(myuser)}</div>
+              <div>{JSON.stringify(userdata)}</div>
+            </div>
+          </Row>
+        </Container>
+      </Container>
 
     </div>
   );
 }
 
 export default App;
-//export default withAuthenticator(App)
