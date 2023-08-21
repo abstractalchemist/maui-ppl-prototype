@@ -11,7 +11,7 @@ function GlobalFilter({ preGlobalFilteredRows, setGlobalFilter}) {
       <Form>
         <Form.Group className="mb-3" controlId="formSearch">
           <Form.Label>Search</Form.Label>
-          <Form.Control type="text" placeholder="Search" onChange={evt => {
+          <Form.Control type="text" placeholder="Search or Filter" onChange={evt => {
             const value = evt.target.value || undefined
             setGlobalFilter(value)
           }}/>
