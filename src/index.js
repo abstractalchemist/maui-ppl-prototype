@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@aws-amplify/ui-react/styles.css';
-import { Route, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Route, RouterProvider, createHashRouter } from 'react-router-dom';
 import Signin from './Signin';
 import Listings from './Listings'
 
@@ -17,17 +17,17 @@ Analytics.autoTrack('pageView', {
   type: 'SPA'
 })
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <App />,
     children: [
       {
-        path: '/listings',
+        path: 'listings',
         element: <Listings />,
       },
       {
-        path: '/signin',
+        path: 'signin',
         element: <Signin />,
       },
 

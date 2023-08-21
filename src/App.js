@@ -37,11 +37,11 @@ function App({ user }) {
                   <Nav.Link href='/'>Home</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link href='/listings'>Listings</Nav.Link>
+                  <Nav.Link href='/#listings'>Listings</Nav.Link>
                 </Nav.Item>
 
                 <Nav.Item>
-                  <Nav.Link href='/signin'>Sign In</Nav.Link>
+                  <Nav.Link href='/#signin'>Sign In</Nav.Link>
                 </Nav.Item>
               </Nav>
             </Navbar.Collapse>

@@ -2,7 +2,8 @@ import { useState, useEffect, useMemo  } from "react";
 import { API } from "aws-amplify";
 import { useTable, useGlobalFilter } from "react-table";
 import { Container, Row, Col, Form } from "react-bootstrap";
-
+import { Auth } from 'aws-amplify';
+import { listPeople } from "./graphql/queries";
 
 function GlobalFilter({ preGlobalFilteredRows, setGlobalFilter}) {
   return (
@@ -27,20 +28,26 @@ function Listings() {
 
   useEffect(() => {
     (async () => {
-      const listingsData = await API.graphql({ query: `
-        query ListPeople($nextToken: String) {
-          listPeople(nextToken: $nextToken) {
-            items {
-              id
-              name
-              status
-              createdAt
-            }
-            nextToken
-        }
+      if(Auth.currentAuthenticatedUser()) {
+        const listingsData = await API.graphql({ query: listPeople})
+        setListings(listingsData.data.listPeople.items);
       }
-      `});
-      setListings(listingsData.data.listPeople.items);
+      else {
+        const listingsData = await API.graphql({ query: `
+          query ListPeople($nextToken: String) {
+            listPeople(nextToken: $nextToken) {
+              items {
+                id
+                name
+                status
+                createdAt
+              }
+              nextToken
+          }
+        }
+        `});
+        setListings(listingsData.data.listPeople.items);
+      }
     })();
   }, []);
 
@@ -56,6 +63,10 @@ function Listings() {
       Header: 'Status',
       accessor: 'status'
 
+    },
+    {
+      Header: 'Reported By',
+      accessor: 'reportedBy'
     }
   ], []);
 
