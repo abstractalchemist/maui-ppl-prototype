@@ -28,12 +28,14 @@ function Listings() {
 
   useEffect(() => {
     (async () => {
-      if(Auth.currentAuthenticatedUser()) {
+      try {
+       if(await Auth.currentAuthenticatedUser()) {
         const listingsData = await API.graphql({ query: listPeople})
         setListings(listingsData.data.listPeople.items);
       }
-      else {
-        const listingsData = await API.graphql({ query: `
+       
+      } catch(error) {
+         const listingsData = await API.graphql({ query: `
           query ListPeople($nextToken: String) {
             listPeople(nextToken: $nextToken) {
               items {
@@ -47,8 +49,9 @@ function Listings() {
         }
         `});
         setListings(listingsData.data.listPeople.items);
+   
       }
-    })();
+        })();
   }, []);
 
 
