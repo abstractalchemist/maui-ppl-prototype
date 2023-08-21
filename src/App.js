@@ -46,6 +46,15 @@ function App({ user }) {
               </Nav>
             </Navbar.Collapse>
             <Navbar.Collapse className='justify-content-end'>
+              <Button variant='outline-primary' onClick={() => {
+                  Auth.signOut()
+                    .then(() => {
+                      setUser(null)
+                      setUserData(null)
+                    })
+                    .catch(err => console.log(err))
+                }
+              }>Sign Out</Button>
               <Navbar.Text className='justify-content-end'>
                 Signed In As: {
                   (_ => {

@@ -98,6 +98,9 @@ function Signin() {
           setUserObject(_ => user)
         }
       }
+      else {
+        setAuthenticated(_ => true)
+      }
     })
     .catch(err => alert(err))
   }
