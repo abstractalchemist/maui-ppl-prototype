@@ -9,9 +9,13 @@ import { Route, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Signin from './Signin';
 import Listings from './Listings'
 
-import { Amplify } from 'aws-amplify';
+import { Amplify, Analytics } from 'aws-amplify';
 import awsExports from './aws-exports';
 Amplify.configure(awsExports);
+Analytics.autoTrack('pageView', {
+  enable: true,
+  type: 'SPA'
+})
 
 const router = createBrowserRouter([
   {

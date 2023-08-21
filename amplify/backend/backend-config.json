@@ -1,4 +1,10 @@
 {
+  "analytics": {
+    "mauipplprototype": {
+      "providerPlugin": "awscloudformation",
+      "service": "Pinpoint"
+    }
+  },
   "api": {
     "mauipplprototype": {
       "dependsOn": [],

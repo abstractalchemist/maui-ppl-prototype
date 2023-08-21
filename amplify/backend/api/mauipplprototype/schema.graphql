@@ -10,15 +10,15 @@
 
 
 type Person @model @auth(rules: [
-  { allow: private, operations: [create, update, delete], provider: iam }
+  { allow: private, provider: iam }
   { allow: public, provider: iam, operations: [read] }
 ]) {
-  id: ID! @auth (rules: [{ allow: public, provider: iam, operations: [read] }])
-  name: String! @auth (rules: [{ allow: public, provider: iam, operations: [read] }])
-  age: Int @auth (rules: [{ allow: public, provider: iam, operations: [read] }])
-  reportedBy: String! 
-  contact: String! 
-  status: Status! @auth (rules: [{ allow: public, provider: iam, operations: [read] }])
+  id: ID! 
+  name: String! 
+  age: Int 
+  reportedBy: String @auth(rules: [{ allow: private, provider: iam }])
+  contact: String @auth(rules: [{ allow: private, provider: iam }])
+  status: Status! 
 }
 
 enum Status {

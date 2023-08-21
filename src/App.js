@@ -3,7 +3,7 @@ import './App.css';
 import { Auth } from 'aws-amplify';
 import { useEffect, useState } from 'react';
 import { STSClient, GetCallerIdentityCommand } from '@aws-sdk/client-sts';
-import { Row, Container, Button, Nav } from 'react-bootstrap';
+import { Row, Container, Button, Nav, Navbar } from 'react-bootstrap';
 import { Outlet } from 'react-router-dom';
 
 function App({ user }) {
@@ -29,26 +29,45 @@ function App({ user }) {
   return (
     <div className="App">
       <Container fluid>
-        <Nav variant='tab'>
-          <Nav.Item>
-            <Nav.Link href='/'>Home</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href='/listings'>Listings</Nav.Link>
-          </Nav.Item>
+        <Navbar bg='light' expand='lg'>
+          <Container>
+            <Navbar.Collapse>
+              <Nav variant='tab'>
+                <Nav.Item>
+                  <Nav.Link href='/'>Home</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link href='/listings'>Listings</Nav.Link>
+                </Nav.Item>
 
-          <Nav.Item>
-            <Nav.Link href='/signin'>Sign In</Nav.Link>
-          </Nav.Item>
-        </Nav>
+                <Nav.Item>
+                  <Nav.Link href='/signin'>Sign In</Nav.Link>
+                </Nav.Item>
+              </Nav>
+            </Navbar.Collapse>
+            <Navbar.Collapse className='justify-content-end'>
+              <Navbar.Text className='justify-content-end'>
+                Signed In As: {
+                  (_ => {
+                    if (myuser?.authenticated) {
+                      return myuser.identityId
+                    } else {
+                      return 'Not Signed In'
+                    }
+                  }
+                  )()
+                }
+              </Navbar.Text>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
         <Container>
           <Row>          
             <Outlet />        
           </Row>
           <Row>
             <div>
-              <div>{JSON.stringify(myuser)}</div>
-              <div>{JSON.stringify(userdata)}</div>
+              <div>{JSON.stringify(userdata?.Arn)}</div>
             </div>
           </Row>
         </Container>

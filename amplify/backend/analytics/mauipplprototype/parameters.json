@@ -1,0 +1,21 @@
+{
+    "appName": "mauipplprototype",
+    "roleName": "pinpointLambdaRole7e2abafd",
+    "cloudformationPolicyName": "cloudformationPolicy7e2abafd",
+    "cloudWatchPolicyName": "cloudWatchPolicy7e2abafd",
+    "pinpointPolicyName": "pinpointPolicy7e2abafd",
+    "authPolicyName": "pinpoint_amplify_7e2abafd",
+    "unauthPolicyName": "pinpoint_amplify_7e2abafd",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}
